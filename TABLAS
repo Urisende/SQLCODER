@@ -1,38 +1,38 @@
 TABLA 1 - Peliculas -- contiene las peliculas en cartelera con su información
-    id_movie (PK)
-    titulo
-    descripcion  
-    genero
-    director
-    estreno  
-    duracion
-    clasificacion
+    id_movie INT AUTO_INCREMENT PRIMARY KEY NOT NULL
+    titulo VARCHAR(50) NOT NULL
+    descripcion VARCHAR(500) NOT NULL
+    genero VARCHAR(20) NOT NULL
+    director VARCHAR(50) NOT NULL
+    estreno DATE NOT NULL
+    duracion TIME NOT NULL
+    clasificacion TEXT
 
 TABLA 2 - Clientes -- contiene información de los clientes
-    id_cliente (PK)
-    nombre
-    telefono
-    mail
-    nacimiento
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY NOT NULL
+    nombre VARCHAR(50) NOT NULL
+    telefono INT NOT NULL
+    mail VARCHAR(50) NOT NULL
+    nacimiento DATE NOT NULL
 
 TABLA 3 - Salas -- Contien información de las salas que existen en el cine con información de ellas
-    id_sala (PK)
-    nombre_sala
-    capacidad
-    categoria
+    id_sala INT AUTO_INCREMENT PRIMARY KEY NOT NULL
+    nombre_sala VARCHAR(15) NOT NULL
+    capacidad SMALLINT NOT NULL
+    categoria VARCHAR(2) NOT NULL
 
 TABLA 4 - Funciones -- Contien las funciones asignadas a cada sala y pelicula
-    id_funcion (PK)
-    id_movie (FK)
-    id_sala (FK)
-    fecha_hora
-    aforo
+    id_funcion INT AUTO_INCREMENT PRIMARY KEY NOT NULL
+    id_movie INT NOT NULL (FK)
+    id_sala INT NOT NULL (FK)
+    fecha_hora DATETIME NOT NULL
+    aforo DECIMAL(5,2) NOT NULL
 
 TABLA 5 - Boletos -- Contiene los boletos comprados por los clientes
-    id_boletos (PK)
-    id_cliente (FK)
-    id_funcion (FK)
-    id_sala (FK)
-    asiento
-    precio
-    medio_de_pago
+    id_boletos INT AUT_INCREMENT PRIMARY KEY NOT NULL
+    id_cliente INT NOT NULL (FK)
+    id_funcion INT NOT NULL (FK)
+    id_sala INT NOT NULL (FK)
+    asiento VARCHAR(4) NOT NULL
+    precio INT NOT NULL
+    medio_de_pago VARCHAR(25) NOT NULL
