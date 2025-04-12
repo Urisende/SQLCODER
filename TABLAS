@@ -1,0 +1,38 @@
+TABLA 1 - Peliculas -- contiene las peliculas en cartelera con su información
+    id_movie (PK)
+    titulo
+    descripcion  
+    genero
+    director
+    estreno  
+    duracion
+    clasificacion
+
+TABLA 2 - Clientes -- contiene información de los clientes
+    id_cliente (PK)
+    nombre
+    telefono
+    mail
+    nacimiento
+
+TABLA 3 - Salas -- Contien información de las salas que existen en el cine con información de ellas
+    id_sala (PK)
+    nombre_sala
+    capacidad
+    categoria
+
+TABLA 4 - Funciones -- Contien las funciones asignadas a cada sala y pelicula
+    id_funcion (PK)
+    id_movie (FK)
+    id_sala (FK)
+    fecha_hora
+    aforo
+
+TABLA 5 - Boletos -- Contiene los boletos comprados por los clientes
+    id_boletos (PK)
+    id_cliente (FK)
+    id_funcion (FK)
+    id_sala (FK)
+    asiento
+    precio
+    medio_de_pago
