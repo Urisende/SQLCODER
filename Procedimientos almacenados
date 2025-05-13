@@ -1,0 +1,30 @@
+USE cine;
+   -- PROCEDURE 1 
+    DELIMITER //
+
+CREATE PROCEDURE obtener_clientes_funcion (IN id_func INT)
+BEGIN
+    SELECT c.*
+    FROM clientes c
+    INNER JOIN boletos b ON c.id_cliente = b.id_cliente
+    WHERE b.id_funcion = id_func;
+END //
+
+DELIMITER ;
+
+CALL obtener_clientes_funcion(1);
+
+-- PROCEDURE 2
+
+    DELIMITER //
+
+CREATE PROCEDURE obtener_clientes_Segun_pago (IN b_medio_de_pago varchar(50))
+BEGIN
+	SELECT * FROM boletos
+    WHERE medio_de_pago = b_medio_de_pago;
+    END //
+    
+    DELIMITER ; 
+
+
+CALL obtener_clientes_segun_pago('efectivo');
