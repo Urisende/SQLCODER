@@ -1,0 +1,28 @@
+Listado de vistas
+
+-- VISTA 1 -- Permite ver las funcionesque se reproducirán el día de hoy, su sala y su película.
+CREATE VIEW v_funciones_hoy AS
+SELECT * FROM funciones 
+WHERE DATE(fecha_hora) = CURDATE();
+
+-- VISTA 2 -- Permite ver que peliculas y funciones pasarán el día de hoy en X sala, en este caso la 1 pero se podría replicar para todas
+CREATE VIEW v_funciones_sala1 AS
+SELECT 
+    f.id_funcion,
+    f.fecha_hora,
+    s.nombre_sala,
+    p.titulo,
+    p.genero,
+    p.duracion
+FROM funciones f
+JOIN peliculas p ON f.id_movie = p.id_movie
+JOIN salas s ON f.id_sala = s.id_sala
+WHERE DATE(f.fecha_hora) = CURDATE()
+  AND s.nombre_sala = 'Sala 1';
+
+-- VISTA 3 -- Permite a la boletería poder ver que funciones se proyectarán el día de hoy y a que hora para ofrecerla a la persona que vaya al cine
+CREATE VIEW v_peliculas_funciones AS
+SELECT p.id_movie, p.titulo, f.id_funcion, f.fecha_hora
+FROM peliculas p
+INNER JOIN funciones f ON p.id_movie = f.id_movie
+WHERE DATE(f.fecha_hora) = CURDATE();
