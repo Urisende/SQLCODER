@@ -1,5 +1,5 @@
 USE cine;
-   -- PROCEDURE 1 
+   -- PROCEDURE 1 -- El objtivo de este procedimiento es consultar los clientes que asistiran a una función. Para ello indicamos el id de la función y nos traerá a los clietes que participarán en la misma
     DELIMITER //
 
 CREATE PROCEDURE obtener_clientes_funcion (IN id_func INT)
@@ -14,7 +14,7 @@ DELIMITER ;
 
 CALL obtener_clientes_funcion(1);
 
--- PROCEDURE 2
+-- PROCEDURE 2 -- Nos permite conocer que clientes pagaron con X medio de pago. Si necesitaramos saber quienes pagaron en efectivo, ejecutamos este procedimiento y nos traerá el listado.
 
     DELIMITER //
 
@@ -30,8 +30,7 @@ BEGIN
 CALL obtener_clientes_segun_pago('efectivo');
 
 
-
--- parte 2 actividad práctica clase 8
+-- Procedure 3 -- Este SP permite consultar todas las columnas de la tabla peliculas de manera ascendente o descendente
 
 DELIMITER //
 
@@ -47,10 +46,9 @@ END //
 
 DELIMITER ;
 
--- Este SP permite consultar todas las columnas de la tabla peliculas de manera ascendente o descendente
 CALL listar_peliculas_ordenadas ('estreno','asc');
 
--- ejemplo 2
+-- Procedure 4 -- Este procedimiento permite incluir dentro de la tabla peliculas un nuevo título
 
 DELIMITER //
 
@@ -69,8 +67,6 @@ BEGIN
 END //
 
 DELIMITER ;
-
--- Este procedimiento permite incluir dentro de la tabla peliculas un nuevo título
 
 CALL insertarpelicula ('Cars','Un ganador sobre ruedas','Animación','Juan Pablo','2007-07-14','01:30:00','R'); 
 SELECT * FROM peliculas;
