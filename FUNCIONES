@@ -1,0 +1,64 @@
+-- Ejemplo 1 -- Nos permite saber cuantas funciones tenemos hoy y en base a eso organizar el día.
+
+DELIMITER //
+
+CREATE FUNCTION cantidad_funciones_hoy()
+RETURNS INT
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+    DECLARE total INT;
+
+    SELECT COUNT(*) INTO total
+    FROM funciones
+    WHERE DATE(fecha_hora) = CURDATE();
+
+    RETURN total;
+END //
+
+DELIMITER ;
+
+SELECT cantidad_funciones_hoy();
+
+-- Ejemplo 2 -- nos permite saber cuantos boletos se vendieron el día de hoy. Si quisieramos podríamos agregarle mas información necesaria
+
+DELIMITER //
+
+CREATE FUNCTION cantidad_boletos_hoy()
+RETURNS INT
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+    DECLARE total INT;
+
+    SELECT COUNT(*) INTO total
+    FROM boletos b
+    INNER JOIN funciones f ON b.id_funcion = f.id_funcion
+    WHERE DATE(f.fecha_hora) = CURDATE();
+
+    RETURN total;
+END //
+
+DELIMITER ;
+
+SELECT cantidad_boletos_hoy();
+
+-- ejemplo 3 -- Nos permite conocer cuantos boletos sacó cada cliente y de esa manera crar estrategias de venta a futuro. 
+
+DELIMITER //
+
+CREATE FUNCTION cantidad_boletos_cliente(p_id INT)
+RETURNS INT
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+    DECLARE total INT;
+    SELECT COUNT(*) INTO total
+    FROM boletos
+    WHERE id_cliente = p_id;
+    RETURN total;
+END //
+
+DELIMITER ;
+
+SELECT nombre, cantidad_boletos_cliente(id_cliente) AS entradas FROM clientes;
